@@ -4,8 +4,8 @@
 
 QUIC                                                           M. Piraux
 Internet-Draft                                                 UCLouvain
-Intended status: Experimental                          29 September 2022
-Expires: 2 April 2023
+Intended status: Experimental                             4 October 2022
+Expires: 7 April 2023
 
 
                      Additional addresses for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2023.
+   This Internet-Draft will expire on 7 April 2023.
 
 Copyright Notice
 
@@ -71,6 +71,7 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Overview
+     3.1.  Example of use
    4.  Additional Addresses Transport Parameter
    5.  Security Considerations
    6.  IANA Considerations
@@ -82,7 +83,23 @@ Table of Contents
 
 1.  Introduction
 
-   TODO Introduction
+   The QUIC protocol specifies several techniques for network path
+   migration.  The client can migrate from one of its local addresses to
+   another at any time after the handshake using connection migration.
+   The server can transfer a connection to one of its addresses shortly
+   after the handshake by using the preferred_address transport
+   parameter.  However, it cannot advertise additional addresses that a
+   client may use.
+
+   This limitation impacts several scenarios.  For instance, a
+   multihomed server that has access to several subnets cannot advertise
+   all its addresses.  A dual-stack server cannot advertise its other
+   address so that a client losing the address family used to establish
+   the connection can migrate to the other address family.
+
+   This document proposes a QUIC Transport Parameter enabling a QUIC
+   server to advertise additional addresses that can be used for a QUIC
+   connection.
 
 2.  Conventions and Definitions
 
@@ -103,7 +120,47 @@ Table of Contents
 
    When sending packets to a new server address, the client MUST
    validate the address using Path Validation as described in
-   Section 8.2 of [QUIC-TRANSPORT].
+   Section 8.2 of [QUIC-TRANSPORT].  When Preferred Adress and
+   Additional Addresses are use together, the client SHOULD NOT migrate
+   to an additional address before acting on the preferred address
+   indicated by the server.
+
+3.1.  Example of use
+
+   Figure 1 illustrates an example of use for Additional Addresses when
+   involved in a QUIC deployment featuring a load balancer making uses
+   of the Preferred Address mechanism.
+
+   First, the client sends its Initial packet to the load balancer,
+   which forwards it to the first server IP.  The server answers to the
+   QUIC connection opening and indicates its first IP as a preferred
+   address and its second one as an additional address.  When the
+   handshake completes, the client validates the preferred address and
+   migrates to it.  Later on in the connection, the client can validate
+   the path towards the second server IP and can migrate to it.
+
+   Client            Load-balancer         Server @ IP a   Server @ IP b
+   |                      |                      |               |
+   |       Initial[0]: CRYPTO(CH)                |               |
+   |---------------------/F/-------------------->|               |
+                                ....
+   | Handshake[0]: CRYPTO(EE(Pr.Addr=a,A.Addr=b)]|               |
+   |<--------------------/F/---------------------|               |
+                                ....
+   |       Handshake[0]: CRYPTO(Fin)             |               |
+   |---------------------/F/-------------------->|               |
+   |    /* Migration to Preferred Address a */   |               |
+   |-------------------------------------------->|               |
+                                ....
+   |                      |                      |
+   |                      |                      .               |
+   | 1-RTT[1]: PATH_CHALLENGE  /* Migration to Add. Address b */ |
+   |------------------------------------------------------------>|
+   |                                   1-RTT[1]: PATH_RESPONSE   |
+   |<------------------------------------------------------------|
+   |                                                             |
+
+         Figure 1: A server reached through a LB uses Add. Address
 
 4.  Additional Addresses Transport Parameter
 
@@ -117,7 +174,7 @@ Table of Contents
      Additional Address (..) ...,
    }
 
-                   Figure 1: Additional Addresses Format
+                   Figure 2: Additional Addresses Format
 
    Additional Address {
      Address Version (8),
@@ -125,7 +182,7 @@ Table of Contents
      IP Port (16),
    }
 
-                    Figure 2: Additional Address Format
+                    Figure 3: Additional Address Format
 
    Address Version:  A 8-bit value identifying the Internet address
       version of this address.  The value 4 indicates IPv4 while 6
