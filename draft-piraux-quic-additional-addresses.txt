@@ -4,8 +4,8 @@
 
 QUIC                                                           M. Piraux
 Internet-Draft                                                 UCLouvain
-Intended status: Experimental                             4 October 2022
-Expires: 7 April 2023
+Intended status: Experimental                             6 October 2022
+Expires: 9 April 2023
 
 
                      Additional addresses for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 April 2023.
+   This Internet-Draft will expire on 9 April 2023.
 
 Copyright Notice
 
@@ -118,12 +118,11 @@ Table of Contents
    [MULTIPATH-QUIC] is used over a QUIC connection, the client can use
    these addresses to establish new network paths.
 
-   When sending packets to a new server address, the client MUST
-   validate the address using Path Validation as described in
-   Section 8.2 of [QUIC-TRANSPORT].  When Preferred Adress and
-   Additional Addresses are use together, the client SHOULD NOT migrate
-   to an additional address before acting on the preferred address
-   indicated by the server.
+   When sending packets to a new server address, the client validates
+   the address using Path Validation as described in Section 8.2 of
+   [QUIC-TRANSPORT].  When Preferred Adress and Additional Addresses are
+   use together, the client SHOULD NOT migrate to an additional address
+   before acting on the preferred address indicated by the server.
 
 3.1.  Example of use
 
@@ -159,6 +158,8 @@ Table of Contents
    |                                   1-RTT[1]: PATH_RESPONSE   |
    |<------------------------------------------------------------|
    |                                                             |
+                                                   Legend
+                                                     /F/ Forwarded by LB
 
          Figure 1: A server reached through a LB uses Add. Address
 
@@ -267,7 +268,8 @@ Table of Contents
 
 Acknowledgments
 
-   TODO acknowledge.
+   We thank Quentin De Coninck and Francois Michel for their feedback
+   and comments on the first version of this document.
 
 Author's Address
 
