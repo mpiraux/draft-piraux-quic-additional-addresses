@@ -3,9 +3,9 @@
 
 
 QUIC                                                           M. Piraux
-Internet-Draft                                                 UCLouvain
-Intended status: Experimental                             6 October 2022
-Expires: 9 April 2023
+Internet-Draft                                            O. Bonaventure
+Intended status: Experimental                                  UCLouvain
+Expires: 10 April 2023                                    7 October 2022
 
 
                      Additional addresses for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 April 2023.
+   This Internet-Draft will expire on 10 April 2023.
 
 Copyright Notice
 
@@ -79,7 +79,7 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -116,12 +116,12 @@ Table of Contents
    addresses.  These addresses can be used by the client to migrate to a
    new server address at any time after the handshake.  When
    [MULTIPATH-QUIC] is used over a QUIC connection, the client can use
-   these addresses to establish new network paths.
+   these addresses to establish additional network paths.
 
    When sending packets to a new server address, the client validates
    the address using Path Validation as described in Section 8.2 of
    [QUIC-TRANSPORT].  When Preferred Adress and Additional Addresses are
-   use together, the client SHOULD NOT migrate to an additional address
+   used together, the client SHOULD NOT migrate to an additional address
    before acting on the preferred address indicated by the server.
 
 3.1.  Example of use
@@ -135,7 +135,7 @@ Table of Contents
    QUIC connection opening and indicates its first IP as a preferred
    address and its second one as an additional address.  When the
    handshake completes, the client validates the preferred address and
-   migrates to it.  Later on in the connection, the client can validate
+   migrates to it.  Later during the connection, the client can validate
    the path towards the second server IP and can migrate to it.
 
    Client            Load-balancer         Server @ IP a   Server @ IP b
@@ -165,11 +165,11 @@ Table of Contents
 
 4.  Additional Addresses Transport Parameter
 
-   The following transport parameters is defined:
+   The following transport parameter is defined:
 
    additional_addresses (TBD - experiments use 0xadda):  A list of
       server addresses that the client can migrate the connection to.
-      This transport parameter is only sent by a server.
+      This transport parameter MUST NOT be sent by a client.
 
    Additional Addresses {
      Additional Address (..) ...,
@@ -200,8 +200,8 @@ Table of Contents
 
    This document specifies a mechanism allowing servers to influence the
    IP addresses towards which clients send QUIC packets.  In this case,
-   an attacker can cause a client to send packets to a victim.  A
-   countermeasure similar to Section 21.5.3 of [QUIC-TRANSPORT] is to
+   a malicious server could cause a client to send packets to a victim.
+   A countermeasure similar to Section 21.5.3 of [QUIC-TRANSPORT] is to
    limit the packets that can be sent to a non-validated additional
    addresses.
 
@@ -271,8 +271,13 @@ Acknowledgments
    We thank Quentin De Coninck and Francois Michel for their feedback
    and comments on the first version of this document.
 
-Author's Address
+Authors' Addresses
 
    Maxime Piraux
    UCLouvain
    Email: maxime.piraux@uclouvain.be
+
+
+   Olivier Bonaventure
+   UCLouvain
+   Email: olivier.bonaventure@uclouvain.be
