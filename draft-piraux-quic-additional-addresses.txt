@@ -5,7 +5,7 @@
 QUIC                                                           M. Piraux
 Internet-Draft                                            O. Bonaventure
 Intended status: Experimental                                  UCLouvain
-Expires: 16 April 2023                                   13 October 2022
+Expires: 17 April 2023                                   14 October 2022
 
 
                      Additional addresses for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2023.
+   This Internet-Draft will expire on 17 April 2023.
 
 Copyright Notice
 
@@ -86,8 +86,8 @@ Table of Contents
    The QUIC protocol specifies several techniques for network path
    migration.  The client can migrate from one of its local addresses to
    another at any time after the handshake using connection migration.
-   The server can transfer a connection to one of its addresses shortly
-   after the handshake by using the preferred_address transport
+   The server can transfer a connection to one of its other addresses
+   shortly after the handshake by using the preferred_address transport
    parameter.  However, it cannot advertise additional addresses that a
    client may use.
 
@@ -130,9 +130,9 @@ Table of Contents
 
 3.1.  Example of use
 
-   Figure 1 illustrates an example of use for Additional Addresses when
-   involved in a QUIC deployment featuring a load balancer making uses
-   of the Preferred Address mechanism.
+   Figure 1 illustrates an example of use for Additional Addresses in a
+   QUIC deployment featuring a load balancer and a multihomed server
+   making use of the Preferred Address mechanism.
 
    First, the client sends its Initial packet to the load balancer,
    which forwards it to the first server IP.  The server answers to the
@@ -206,7 +206,7 @@ Table of Contents
    IP addresses towards which clients send QUIC packets.  In this case,
    a malicious server could cause a client to send packets to a victim.
    A countermeasure similar to Section 21.5.3 of [QUIC-TRANSPORT] is to
-   limit the packets that can be sent to a non-validated additional
+   limit the packets that are sent to a non-validated additional
    addresses.
 
    A client MUST NOT send non-probing frames to an additional address
