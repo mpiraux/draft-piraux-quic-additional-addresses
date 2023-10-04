@@ -4,8 +4,8 @@
 
 QUIC                                                           M. Piraux
 Internet-Draft                                            O. Bonaventure
-Intended status: Experimental                                  UCLouvain
-Expires: 17 March 2024                                 14 September 2023
+Intended status: Experimental                          UCLouvain, WEL RI
+Expires: 6 April 2024                                     4 October 2023
 
 
                      Additional addresses for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 March 2024.
+   This Internet-Draft will expire on 6 April 2024.
 
 Copyright Notice
 
@@ -324,10 +324,10 @@ Acknowledgments
 Authors' Addresses
 
    Maxime Piraux
-   UCLouvain
+   UCLouvain, WEL RI
    Email: maxime.piraux@uclouvain.be
 
 
    Olivier Bonaventure
-   UCLouvain
+   UCLouvain, WEL RI
    Email: olivier.bonaventure@uclouvain.be
