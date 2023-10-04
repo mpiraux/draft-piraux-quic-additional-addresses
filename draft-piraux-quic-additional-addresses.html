@@ -1310,7 +1310,7 @@ Client            Load-balancer         Server @ IP a   Server @ IP b
       </h2>
 <p id="section-5-1">The server uses an ADDITIONAL_ADDRESSES frame (type=TBD - experiments use 0x925addaXX)
 to advertise the additional addresses that a client can use to reach it.
-This frame <span class="bcp14">MUST NOT</span> be sent by a client.<a href="#section-5-1" class="pilcrow">¶</a></p>
+This frame <span class="bcp14">MUST NOT</span> be sent by a client and can only appear in 1-RTT packets.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-additional_addresses-frame-"></span><div id="fig-additional-addresses">
 <figure id="figure-2">
         <div class="alignLeft art-text artwork" id="section-5-2.1">
@@ -1420,7 +1420,7 @@ the "QUIC Transport Parameters" registry under the "QUIC" heading.<a href="#sect
         <tbody>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">TBD (experiments use 0x925addaXX)</td>
-            <td class="text-left" rowspan="1" colspan="1">addition_addresses</td>
+            <td class="text-left" rowspan="1" colspan="1">additional_addresses</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#additional-addresses-transport-parameter" class="auto internal xref">Section 4</a>
 </td>
@@ -1458,6 +1458,10 @@ the "QUIC Frame Types" registry under the "QUIC" heading.<a href="#section-7-5" 
         </tbody>
       </table>
 </div>
+<p id="section-7-7">The last byte of the experimental frame type is used by
+implementations to indicate the version of this document they support.
+For instance, the value 0x925adda01 indicates the support of the -01 version
+of this document.<a href="#section-7-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-8">

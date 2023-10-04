@@ -188,7 +188,8 @@ Table of Contents
 
    The server uses an ADDITIONAL_ADDRESSES frame (type=TBD - experiments
    use 0x925addaXX) to advertise the additional addresses that a client
-   can use to reach it.  This frame MUST NOT be sent by a client.
+   can use to reach it.  This frame MUST NOT be sent by a client and can
+   only appear in 1-RTT packets.
 
    Additional Addresses {
      Type (i) = TBD,
@@ -256,12 +257,12 @@ Table of Contents
    The following entry in Table 1 should be added to the "QUIC Transport
    Parameters" registry under the "QUIC" heading.
 
-         +==================+====================+===============+
-         | Value            | Parameter Name.    | Specification |
-         +==================+====================+===============+
-         | TBD (experiments | addition_addresses | Section 4     |
-         | use 0x925addaXX) |                    |               |
-         +------------------+--------------------+---------------+
+        +==================+======================+===============+
+        | Value            | Parameter Name.      | Specification |
+        +==================+======================+===============+
+        | TBD (experiments | additional_addresses | Section 4     |
+        | use 0x925addaXX) |                      |               |
+        +------------------+----------------------+---------------+
 
            Table 1: Addition to QUIC Transport Parameters Entries
 
@@ -281,6 +282,11 @@ Table of Contents
         +------------------+----------------------+---------------+
 
                Table 2: Addition to QUIC Frame Types Entries
+
+   The last byte of the experimental frame type is used by
+   implementations to indicate the version of this document they
+   support.  For instance, the value 0x925adda01 indicates the support
+   of the -01 version of this document.
 
 8.  References
 
