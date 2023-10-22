@@ -4,8 +4,8 @@
 
 QUIC                                                           M. Piraux
 Internet-Draft                                            O. Bonaventure
-Intended status: Experimental                          UCLouvain, WEL RI
-Expires: 6 April 2024                                     4 October 2023
+Intended status: Experimental                         UCLouvain & WEL RI
+Expires: 24 April 2024                                   22 October 2023
 
 
                      Additional addresses for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 April 2024.
+   This Internet-Draft will expire on 24 April 2024.
 
 Copyright Notice
 
@@ -193,11 +193,19 @@ Table of Contents
 
    Additional Addresses {
      Type (i) = TBD,
+     Sequence Number (i),
      Additional Addresses Count (i),
      Additional Address (..) ...,
    }
 
                 Figure 2: ADDITIONAL_ADDRESSES Frame Format
+
+   Sequence Number:  A variable-length integer indicating the sequence
+      of the frame.  The number is monotonically increasing within a
+      QUIC connection and is chosen by the sender.  It helps the
+      receiver to order ADDITIONAL_ADDRESSES frames by recency.  A
+      receiver SHOULD ignore frames with a Sequence Number lower or
+      equal to the highest Sequence Number received.
 
    Additional Addresses Count:  A variable-length integer indicating the
       number of additional addresses in the frame.
@@ -220,6 +228,12 @@ Table of Contents
 
    IP Port:  A 16-bit value representing the port to use with this IP
       Address.
+
+   The ADDITIONAL_ADDRESSES frame is ack-eliciting.  When a packet
+   containing an ADDITIONAL_ADDRESSES frame is lost and its content is
+   still relevant, the sender MAY retransmit the frame as is.
+   Otherwise, sending a new frame with a new Sequence number is
+   preferred.
 
    The server can update the client on its additional addresses at any
    time by sending an ADDITIONAL_ADDRESSES frame.  When a client is
@@ -330,10 +344,10 @@ Acknowledgments
 Authors' Addresses
 
    Maxime Piraux
-   UCLouvain, WEL RI
+   UCLouvain & WEL RI
    Email: maxime.piraux@uclouvain.be
 
 
    Olivier Bonaventure
-   UCLouvain, WEL RI
+   UCLouvain & WEL RI
    Email: olivier.bonaventure@uclouvain.be
