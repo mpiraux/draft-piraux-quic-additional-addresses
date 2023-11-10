@@ -5,7 +5,7 @@
 QUIC                                                           M. Piraux
 Internet-Draft                                            O. Bonaventure
 Intended status: Experimental                         UCLouvain & WEL RI
-Expires: 24 April 2024                                   22 October 2023
+Expires: 13 May 2024                                    10 November 2023
 
 
                      Additional addresses for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2024.
+   This Internet-Draft will expire on 13 May 2024.
 
 Copyright Notice
 
@@ -148,32 +148,31 @@ Table of Contents
    it.  Later during the connection, the client can validate the path
    towards the second server IP and can migrate to it.
 
-   Client            Load-balancer         Server @ IP a   Server @ IP b
-   |                      |                      |               |
-   |       Initial[0]: CRYPTO(CH(Add.Addr))      |               |
-   |---------------------/F/-------------------->|               |
-                                ....
-   |      Handshake[0]: CRYPTO(EE(Pr.Addr=a),..) |               |
-   |<--------------------/F/---------------------|               |
-   |          1-RTT[0]: ADDITIONAL_ADDRESSES([b])|               |
-   |<--------------------/F/---------------------|               |
-                                ....
-   |       Handshake[0]: CRYPTO(Fin)             |               |
-   |---------------------/F/-------------------->|               |
-   |    /* Migration to Preferred Address a */   |               |
-   |-------------------------------------------->|               |
-                                ....
-   |                      |                      |
-   |                      |                      .               |
-   | 1-RTT[X]: PATH_CHALLENGE  /* Migration to Add. Address b */ |
-   |------------------------------------------------------------>|
-   |                                   1-RTT[Y]: PATH_RESPONSE   |
-   |<------------------------------------------------------------|
-   |                                                             |
-                                                   Legend
-                                                     /F/ Forwarded by LB
+ Client       Load-balancer @ IP lb        Server @ IP a   Server @ IP b
+ |                      |                      |               |
+ |       Initial[0]: CRYPTO(CH(Add.Addr))      |               |
+ |--------------------->|--------------------->|               |
+                              ....
+ |      Handshake[0]: CRYPTO(EE(Pr.Addr=a),..) |               |
+ |<---------------------|<---------------------|               |
+ |          1-RTT[0]: ADDITIONAL_ADDRESSES([b])|               |
+ |<---------------------|<---------------------|               |
+                              ....
+ |       Handshake[0]: CRYPTO(Fin)             |               |
+ |--------------------->|--------------------->|               |
+ |    /* Migration to Preferred Address a */   |               |
+ |-------------------------------------------->|               |
+                              ....
+ |                      |                      |
+ |                      |                      .               |
+ | 1-RTT[X]: PATH_CHALLENGE  /* Migration to Add. Address b */ |
+ |------------------------------------------------------------>|
+ |                                   1-RTT[Y]: PATH_RESPONSE   |
+ |<------------------------------------------------------------|
+ |                                                             |
 
-    Figure 1: A server reached through a load-balancer uses Add. Address
+      Figure 1: A server reached through a load-balancer uses Add.
+                               Addresses
 
 4.  Additional Addresses Transport Parameter
 
@@ -181,8 +180,8 @@ Table of Contents
 
    additional_addresses (TBD - experiments use 0x925addaXX):  Indicates
       the support of the ADDITIONAL_ADDRESSES frame as defined in the
-      -XX draft version of this document.  This transport parameter MUST
-      NOT be sent by a server.
+      -XX draft version of this document.  This transport parameter has
+      a zero-length value.  It MUST NOT be sent by a server.
 
 5.  ADDITIONAL_ADDRESSES Frames
 
@@ -326,9 +325,9 @@ Table of Contents
    [MULTIPATH-QUIC]
               Liu, Y., Ma, Y., De Coninck, Q., Bonaventure, O., Huitema,
               C., and M. Kühlewind, "Multipath Extension for QUIC", Work
-              in Progress, Internet-Draft, draft-ietf-quic-multipath-05,
-              10 July 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-quic-multipath-05>.
+              in Progress, Internet-Draft, draft-ietf-quic-multipath-06,
+              23 October 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-quic-multipath-06>.
 
    [RFC8678]  Baker, F., Bowers, C., and J. Linkova, "Enterprise
               Multihoming using Provider-Assigned IPv6 Addresses without
@@ -340,6 +339,9 @@ Acknowledgments
 
    We thank Quentin De Coninck and François Michel for their feedback
    and comments on the first version of this document.
+
+   We thank Marcel Kempf, Moritz Buhl, Louis Navarre and François Michel
+   for joining the interop during the IETF 118 Hackathon.
 
 Authors' Addresses
 
