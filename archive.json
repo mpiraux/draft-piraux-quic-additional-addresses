@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-22T00:59:33.796864+00:00",
+  "timestamp": "2025-04-24T00:59:57.505812+00:00",
   "repo": "mpiraux/draft-piraux-quic-additional-addresses",
   "labels": [
     {
@@ -49,6 +49,23 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOIF2_Ds6zmIOF",
+      "title": "Status?",
+      "url": "https://github.com/mpiraux/draft-piraux-quic-additional-addresses/issues/1",
+      "state": "OPEN",
+      "author": "nemethf",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm curious about the status of this draft.  It's going to expire tomorrow, but I think the stateless nature of ADDITIONAL_ADDRESSES is in some sense better than what draft-seemann-quic-nat-traversal provide with its ADD_ADDRESS.\n\nThank you.",
+      "createdAt": "2025-04-23T08:21:07Z",
+      "updatedAt": "2025-04-23T08:21:07Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
