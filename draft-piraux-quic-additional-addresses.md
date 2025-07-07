@@ -25,10 +25,10 @@ venue:
 author:
  -
     fullname: Maxime Piraux
-    organization: UCLouvain & WEL RI
+    organization: UCLouvain
     email: maxime.piraux@uclouvain.be
  -  fullname: Olivier Bonaventure
-    organization: UCLouvain & WEL RI
+    organization: UCLouvain & WELRI
     email: olivier.bonaventure@uclouvain.be
 
 normative:
@@ -38,7 +38,7 @@ normative:
 informative:
   MULTIPATH-QUIC: I-D.ietf-quic-multipath
   RFC8678:
-
+  AF-SELECTION: DOI.10.1145/3717512.37175 
 
 --- abstract
 
@@ -63,7 +63,11 @@ solve the multihoming problem {{RFC8678}}, announcing several server addresses
 enables applications using QUIC to recover from provider failures.
 Also, a dual-stack server cannot advertise its other address so that a client
 losing the address family used to establish the connection can migrate to the
-other address family.
+other address family. Furthermore, measurements show that the performance
+of the paths using different address families sometimes differ, notably in
+terms of latency {{AF-SELECTION}}. When a dual-stack client interacts with a
+dual-stack server using Multipath QUIC, it can be beneficial to be able to
+efficiently probe the two paths to use the best performing one. 
 
 This document proposes a QUIC frame and a QUIC transport parameter enabling
 a QUIC server to advertise additional addresses that can be used for a QUIC
