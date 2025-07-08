@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-06T01:10:37.170620+00:00",
+  "timestamp": "2025-07-08T01:05:13.976629+00:00",
   "repo": "mpiraux/draft-piraux-quic-additional-addresses",
   "labels": [
     {
@@ -55,16 +55,24 @@
       "id": "I_kwDOIF2_Ds6zmIOF",
       "title": "Status?",
       "url": "https://github.com/mpiraux/draft-piraux-quic-additional-addresses/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nemethf",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I'm curious about the status of this draft.  It's going to expire tomorrow, but I think the stateless nature of ADDITIONAL_ADDRESSES is in some sense better than what draft-seemann-quic-nat-traversal provide with its ADD_ADDRESS.\n\nThank you.",
       "createdAt": "2025-04-23T08:21:07Z",
-      "updatedAt": "2025-04-23T08:21:07Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-07-07T21:05:17Z",
+      "closedAt": "2025-07-07T21:05:17Z",
+      "comments": [
+        {
+          "author": "obonaventure",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'll revive this draft, but I'm unsure that the IETF will accept it",
+          "createdAt": "2025-07-07T21:05:14Z",
+          "updatedAt": "2025-07-07T21:05:14Z"
+        }
+      ]
     }
   ],
   "pulls": []
